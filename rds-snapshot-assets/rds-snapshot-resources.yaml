@@ -1,0 +1,24 @@
+Resources:   
+  DatabaseSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription:
+      SubnetIds: 
+        - Fn::ImportValue: !Sub ${ExportVpcStackName}-PrivateSubnet3
+        - Fn::ImportValue: !Sub ${ExportVpcStackName}-PrivateSubnet4
+      Tags:
+        - Key:
+          Value:
+
+  DatabaseInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AvailabilityZone:
+      DBInstanceClass:
+      DBInstanceIdentifier:
+      DBSnapshotIdentifier:
+      DBSubnetGroupName:
+      Engine:
+      MultiAZ:
+      VPCSecurityGroups:
+        - Fn::ImportValue: !Sub ${ExportVpcStackName}-DataBaseSecurityGroup
